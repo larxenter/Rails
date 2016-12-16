@@ -1,0 +1,3148 @@
+
+
+Started GET "/" for 10.0.2.2 at 2016-12-16 15:06:13 +0000
+
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+	bin/rake db:migrate RAILS_ENV=development
+
+):
+  activerecord (4.1.8) lib/active_record/migration.rb:389:in `check_pending!'
+  activerecord (4.1.8) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.1.8) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.1.8) lib/active_support/callbacks.rb:82:in `run_callbacks'
+  actionpack (4.1.8) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.1.8) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.1.8) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  actionpack (4.1.8) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.1.8) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.8) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.8) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.8) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.8) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.8) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.8) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.8) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.8) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.5) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.8) lib/action_dispatch/middleware/static.rb:84:in `call'
+  rack (1.5.5) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.8) lib/rails/engine.rb:514:in `call'
+  railties (4.1.8) lib/rails/application.rb:144:in `call'
+  rack (1.5.5) lib/rack/lock.rb:17:in `call'
+  rack (1.5.5) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.5) lib/rack/handler/webrick.rb:60:in `service'
+  /home/vagrant/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/vagrant/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/vagrant/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+  Rendered /home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.4ms)
+  Rendered /home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.6ms)
+  Rendered /home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.5ms)
+  Rendered /home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (15.9ms)
+  [1m[36m (12.0ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (4.2ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.8ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateUsers (20150326194204)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.8ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar(255), "last_name" varchar(255), "alias" varchar(255), "email" varchar(255), "encrypted_password" varchar(255), "salt" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150326194204"]]
+  [1m[35m (1.7ms)[0m  commit transaction
+Migrating to CreateIdeas (20150326201332)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (2.0ms)[0m  CREATE TABLE "ideas" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "idea" text, "user_id" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_ideas_on_user_id" ON "ideas" ("user_id")[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150326201332"]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+Migrating to CreateLikes (20150326203836)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (2.0ms)[0m  [1mCREATE TABLE "likes" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "idea_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.3ms)[0m  CREATE  INDEX "index_likes_on_user_id" ON "likes" ("user_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_likes_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_likes_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "index_likes_on_idea_id" ON "likes" ("idea_id")
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150326203836"]]
+  [1m[35m (1.7ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.6ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_ideas_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_ideas_on_user_id' AND type='index'
+
+  [1m[36m (0.8ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_likes_on_idea_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_likes_on_idea_id' AND type='index'
+[0m
+  [1m[35m (1.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_likes_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_likes_on_user_id' AND type='index'
+
+
+
+Started GET "/" for 10.0.2.2 at 2016-12-16 15:06:48 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (38.5ms)
+Completed 200 OK in 1105ms (Views: 1009.7ms | ActiveRecord: 3.8ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:06:50 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:06:50 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:06:50 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:06:50 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:06:50 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:06:50 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:06:50 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 15:06:50 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:06:50 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:06:50 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:06:50 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:06:50 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:06:50 +0000
+
+
+Started POST "/users" for 10.0.2.2 at 2016-12-16 15:07:14 +0000
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FYLy906kiDE6IAeOw5pfr2weuf9p7DVoqm5cMWpoYGI=", "user"=>{"first_name"=>"maxime", "last_name"=>"querou", "email"=>"maximequerou@gmail.com", "alias"=>"max", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Register"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (1.8ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE LOWER("users"."email") = LOWER('maximequerou@gmail.com') LIMIT 1[0m
+  [1m[35mSQL (1.6ms)[0m  INSERT INTO "users" ("alias", "created_at", "email", "encrypted_password", "first_name", "last_name", "salt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["alias", "max"], ["created_at", "2016-12-16 15:07:14.318374"], ["email", "maximequerou@gmail.com"], ["encrypted_password", "805ed2ae8fdb0b92082b924905a6000e886a44ada59697ae8d3828d3440908be"], ["first_name", "maxime"], ["last_name", "querou"], ["salt", "08fe332b7a7f0e1d12bc4c5ea1e6639b7b5f451a139d0c4918d84459536ae8a3"], ["updated_at", "2016-12-16 15:07:14.318374"]]
+  [1m[36m (1.8ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 80ms (ActiveRecord: 5.2ms)
+
+
+Started GET "/" for 10.0.2.2 at 2016-12-16 15:07:14 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 301ms (Views: 236.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:14 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:14 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:14 +0000
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:14 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:14 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:14 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:15 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:15 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:15 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:15 +0000
+
+
+Started POST "/sessions/create" for 10.0.2.2 at 2016-12-16 15:07:29 +0000
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FYLy906kiDE6IAeOw5pfr2weuf9p7DVoqm5cMWpoYGI=", "session"=>{"email"=>"maximequerou@gmail.com", "password"=>"[FILTERED]"}, "commit"=>"Log in"}
+  [1m[35mUser Load (1.4ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."email" = 'maximequerou@gmail.com' LIMIT 1
+Redirected to http://localhost:3000/ideas
+Completed 302 Found in 41ms (ActiveRecord: 1.4ms)
+
+
+Started GET "/ideas" for 10.0.2.2 at 2016-12-16 15:07:29 +0000
+Processing by IdeasController#index as HTML
+  [1m[36mUser Load (1.7ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mIdea Load (0.8ms)[0m  SELECT "ideas".* FROM "ideas" INNER JOIN "likes" ON "likes"."idea_id" = "ideas"."id" GROUP BY idea_id  ORDER BY count(likes.idea_id) DESC
+  [1m[36mIdea Load (1.0ms)[0m  [1mSELECT "ideas".* FROM "ideas"[0m
+  Rendered ideas/index.html.erb within layouts/application (7.4ms)
+  [1m[35mLike Load (0.8ms)[0m  SELECT "likes".* FROM "likes"
+Completed 200 OK in 350ms (Views: 242.4ms | ActiveRecord: 5.7ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:30 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:30 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:30 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:30 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:30 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:30 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:30 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:30 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:30 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:30 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:30 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:30 +0000
+
+
+Started POST "/ideas/create" for 10.0.2.2 at 2016-12-16 15:07:37 +0000
+Processing by IdeasController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FYLy906kiDE6IAeOw5pfr2weuf9p7DVoqm5cMWpoYGI=", "idea"=>{"idea"=>"hey", "user_id"=>"1"}, "commit"=>"Idea!"}
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (4.0ms)[0m  INSERT INTO "ideas" ("created_at", "idea", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", "2016-12-16 15:07:37.203460"], ["idea", "hey"], ["updated_at", "2016-12-16 15:07:37.203460"], ["user_id", 1]]
+  [1m[36m (10.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/ideas
+Completed 302 Found in 46ms (ActiveRecord: 14.8ms)
+
+
+Started GET "/ideas" for 10.0.2.2 at 2016-12-16 15:07:37 +0000
+Processing by IdeasController#index as HTML
+  [1m[35mUser Load (1.6ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mIdea Load (1.7ms)[0m  [1mSELECT "ideas".* FROM "ideas" INNER JOIN "likes" ON "likes"."idea_id" = "ideas"."id" GROUP BY idea_id  ORDER BY count(likes.idea_id) DESC[0m
+  [1m[35mIdea Load (1.5ms)[0m  SELECT "ideas".* FROM "ideas"
+  [1m[36mUser Load (0.9ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (1.1ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 1]]
+  Rendered ideas/index.html.erb within layouts/application (36.3ms)
+  [1m[36mLike Load (1.1ms)[0m  [1mSELECT "likes".* FROM "likes"[0m
+Completed 200 OK in 284ms (Views: 216.6ms | ActiveRecord: 12.5ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:37 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:37 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:37 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:37 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:37 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:37 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:37 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:37 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:37 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:37 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:37 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:38 +0000
+
+
+Started POST "/likes/create" for 10.0.2.2 at 2016-12-16 15:07:40 +0000
+Processing by LikesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FYLy906kiDE6IAeOw5pfr2weuf9p7DVoqm5cMWpoYGI=", "like"=>{"user_id"=>"1", "idea_id"=>"1"}, "commit"=>"Like"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mLike Exists (1.1ms)[0m  [1mSELECT  1 AS one FROM "likes"  WHERE ("likes"."user_id" = 1 AND "likes"."idea_id" = 1) LIMIT 1[0m
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "likes" ("created_at", "idea_id", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", "2016-12-16 15:07:40.376777"], ["idea_id", 1], ["updated_at", "2016-12-16 15:07:40.376777"], ["user_id", 1]]
+  [1m[36m (10.1ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/ideas
+Completed 302 Found in 47ms (ActiveRecord: 13.2ms)
+
+
+Started GET "/ideas" for 10.0.2.2 at 2016-12-16 15:07:40 +0000
+Processing by IdeasController#index as HTML
+  [1m[35mUser Load (0.9ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mIdea Load (1.7ms)[0m  [1mSELECT "ideas".* FROM "ideas" INNER JOIN "likes" ON "likes"."idea_id" = "ideas"."id" GROUP BY idea_id  ORDER BY count(likes.idea_id) DESC[0m
+  [1m[35mIdea Load (1.7ms)[0m  SELECT "ideas".* FROM "ideas"
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (1.2ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 1]]
+  Rendered ideas/index.html.erb within layouts/application (5.6ms)
+  [1m[36mLike Load (1.8ms)[0m  [1mSELECT "likes".* FROM "likes"[0m
+Completed 200 OK in 249ms (Views: 187.6ms | ActiveRecord: 8.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:40 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:40 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:40 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:40 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:40 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:40 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:41 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:41 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:41 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:41 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:41 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:41 +0000
+
+
+Started POST "/likes/create" for 10.0.2.2 at 2016-12-16 15:07:42 +0000
+Processing by LikesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FYLy906kiDE6IAeOw5pfr2weuf9p7DVoqm5cMWpoYGI=", "like"=>{"user_id"=>"1", "idea_id"=>"1"}, "commit"=>"Like"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mLike Exists (1.0ms)[0m  [1mSELECT  1 AS one FROM "likes"  WHERE ("likes"."user_id" = 1 AND "likes"."idea_id" = 1) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+Redirected to http://localhost:3000/ideas
+Completed 302 Found in 27ms (ActiveRecord: 1.2ms)
+
+
+Started GET "/ideas" for 10.0.2.2 at 2016-12-16 15:07:42 +0000
+Processing by IdeasController#index as HTML
+  [1m[36mUser Load (1.5ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mIdea Load (1.5ms)[0m  SELECT "ideas".* FROM "ideas" INNER JOIN "likes" ON "likes"."idea_id" = "ideas"."id" GROUP BY idea_id  ORDER BY count(likes.idea_id) DESC
+  [1m[36mIdea Load (1.5ms)[0m  [1mSELECT "ideas".* FROM "ideas"[0m
+  [1m[35mUser Load (1.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (1.3ms)[0m  [1mSELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?[0m  [["idea_id", 1]]
+  Rendered ideas/index.html.erb within layouts/application (11.1ms)
+  [1m[35mLike Load (1.6ms)[0m  SELECT "likes".* FROM "likes"
+Completed 200 OK in 338ms (Views: 261.5ms | ActiveRecord: 8.5ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:43 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:43 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:43 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:43 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:43 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:43 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:43 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:43 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:43 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:43 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:43 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:43 +0000
+
+
+Started POST "/likes/create" for 10.0.2.2 at 2016-12-16 15:07:45 +0000
+Processing by LikesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FYLy906kiDE6IAeOw5pfr2weuf9p7DVoqm5cMWpoYGI=", "like"=>{"user_id"=>"1", "idea_id"=>"1"}, "commit"=>"Like"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mLike Exists (1.6ms)[0m  SELECT  1 AS one FROM "likes"  WHERE ("likes"."user_id" = 1 AND "likes"."idea_id" = 1) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/ideas
+Completed 302 Found in 26ms (ActiveRecord: 1.8ms)
+
+
+Started GET "/ideas" for 10.0.2.2 at 2016-12-16 15:07:45 +0000
+Processing by IdeasController#index as HTML
+  [1m[35mUser Load (0.7ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mIdea Load (1.7ms)[0m  [1mSELECT "ideas".* FROM "ideas" INNER JOIN "likes" ON "likes"."idea_id" = "ideas"."id" GROUP BY idea_id  ORDER BY count(likes.idea_id) DESC[0m
+  [1m[35mIdea Load (1.7ms)[0m  SELECT "ideas".* FROM "ideas"
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (1.5ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 1]]
+  Rendered ideas/index.html.erb within layouts/application (6.2ms)
+  [1m[36mLike Load (1.5ms)[0m  [1mSELECT "likes".* FROM "likes"[0m
+Completed 200 OK in 300ms (Views: 227.1ms | ActiveRecord: 7.8ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:45 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:45 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:45 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:45 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:07:45 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:45 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:45 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:45 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:45 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:45 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:45 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:07:46 +0000
+
+
+Started GET "/signout" for 10.0.2.2 at 2016-12-16 15:08:01 +0000
+Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3000/
+Completed 302 Found in 24ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 10.0.2.2 at 2016-12-16 15:08:02 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 240ms (Views: 190.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/sessions/create" for 10.0.2.2 at 2016-12-16 15:20:31 +0000
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FYLy906kiDE6IAeOw5pfr2weuf9p7DVoqm5cMWpoYGI=", "session"=>{"email"=>"maximequerou@gmail.com", "password"=>"[FILTERED]"}, "commit"=>"Log in"}
+  [1m[35mUser Load (1.5ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."email" = 'maximequerou@gmail.com' LIMIT 1
+Redirected to http://localhost:3000/ideas
+Completed 302 Found in 22ms (ActiveRecord: 1.5ms)
+
+
+Started GET "/ideas" for 10.0.2.2 at 2016-12-16 15:20:31 +0000
+Processing by IdeasController#index as HTML
+  [1m[36mUser Load (1.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mIdea Load (0.7ms)[0m  SELECT "ideas".* FROM "ideas" INNER JOIN "likes" ON "likes"."idea_id" = "ideas"."id" GROUP BY idea_id  ORDER BY count(likes.idea_id) DESC
+  [1m[36mIdea Load (0.8ms)[0m  [1mSELECT "ideas".* FROM "ideas"[0m
+  [1m[35mUser Load (0.7ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.7ms)[0m  [1mSELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?[0m  [["idea_id", 1]]
+  Rendered ideas/index.html.erb within layouts/application (4.6ms)
+  [1m[35mLike Load (1.0ms)[0m  SELECT "likes".* FROM "likes"
+Completed 200 OK in 296ms (Views: 211.9ms | ActiveRecord: 5.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:20:32 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:20:32 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:20:32 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:20:32 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:20:32 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:20:32 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:20:32 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:20:32 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:20:32 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:20:32 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:20:32 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:20:32 +0000
+
+
+Started POST "/ideas/create" for 10.0.2.2 at 2016-12-16 15:20:55 +0000
+Processing by IdeasController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FYLy906kiDE6IAeOw5pfr2weuf9p7DVoqm5cMWpoYGI=", "idea"=>{"idea"=>"test", "user_id"=>"1"}, "commit"=>"Idea!"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (12.2ms)[0m  INSERT INTO "ideas" ("created_at", "idea", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", "2016-12-16 15:20:55.919388"], ["idea", "test"], ["updated_at", "2016-12-16 15:20:55.919388"], ["user_id", 1]]
+  [1m[36m (2.8ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/ideas
+Completed 302 Found in 38ms (ActiveRecord: 15.0ms)
+
+
+Started GET "/ideas" for 10.0.2.2 at 2016-12-16 15:20:55 +0000
+Processing by IdeasController#index as HTML
+  [1m[35mUser Load (1.3ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mIdea Load (1.6ms)[0m  [1mSELECT "ideas".* FROM "ideas" INNER JOIN "likes" ON "likes"."idea_id" = "ideas"."id" GROUP BY idea_id  ORDER BY count(likes.idea_id) DESC[0m
+  [1m[35mIdea Load (1.7ms)[0m  SELECT "ideas".* FROM "ideas"
+  [1m[36mUser Load (1.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (1.0ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (2.1ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 2]]
+  Rendered ideas/index.html.erb within layouts/application (12.0ms)
+  [1m[36mLike Load (0.9ms)[0m  [1mSELECT "likes".* FROM "likes"[0m
+Completed 200 OK in 305ms (Views: 237.5ms | ActiveRecord: 9.7ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:20:56 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:20:56 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:20:56 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:20:56 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:20:56 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:20:56 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:20:56 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:20:56 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:20:56 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:20:56 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:20:56 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:20:56 +0000
+
+
+Started GET "/show" for 10.0.2.2 at 2016-12-16 15:21:02 +0000
+
+ActionController::RoutingError (No route matches [GET] "/show"):
+  actionpack (4.1.8) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.1.8) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.8) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.8) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.8) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.8) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.8) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.8) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.8) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.8) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.5) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.8) lib/action_dispatch/middleware/static.rb:84:in `call'
+  rack (1.5.5) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.8) lib/rails/engine.rb:514:in `call'
+  railties (4.1.8) lib/rails/application.rb:144:in `call'
+  rack (1.5.5) lib/rack/lock.rb:17:in `call'
+  rack (1.5.5) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.5) lib/rack/handler/webrick.rb:60:in `service'
+  /home/vagrant/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/vagrant/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/vagrant/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+  Rendered /home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.8ms)
+  Rendered /home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.2ms)
+  Rendered /home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/routes/_table.html.erb (6.9ms)
+  Rendered /home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (28.6ms)
+
+
+Started GET "/ideas" for 10.0.2.2 at 2016-12-16 15:21:12 +0000
+Processing by IdeasController#index as HTML
+  [1m[35mUser Load (2.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mIdea Load (2.1ms)[0m  [1mSELECT "ideas".* FROM "ideas" INNER JOIN "likes" ON "likes"."idea_id" = "ideas"."id" GROUP BY idea_id  ORDER BY count(likes.idea_id) DESC[0m
+  [1m[35mIdea Load (2.0ms)[0m  SELECT "ideas".* FROM "ideas"
+  [1m[36mUser Load (1.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (1.6ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (1.6ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 2]]
+  Rendered ideas/index.html.erb within layouts/application (10.9ms)
+  [1m[36mLike Load (0.9ms)[0m  [1mSELECT "likes".* FROM "likes"[0m
+Completed 200 OK in 289ms (Views: 208.5ms | ActiveRecord: 11.2ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:21:12 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:21:12 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:21:12 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:21:12 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:21:12 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:21:12 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:21:12 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:21:12 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:21:12 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:21:12 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:21:12 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:21:13 +0000
+
+
+Started GET "/ideas/show" for 10.0.2.2 at 2016-12-16 15:21:18 +0000
+Processing by IdeasController#show as HTML
+  Parameters: {"id"=>"show"}
+  [1m[35mUser Load (2.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mIdea Load (2.2ms)[0m  [1mSELECT  "ideas".* FROM "ideas"  WHERE "ideas"."id" = ? LIMIT 1[0m  [["id", 0]]
+Completed 404 Not Found in 7ms
+
+ActiveRecord::RecordNotFound (Couldn't find Idea with 'id'=show):
+  app/controllers/ideas_controller.rb:27:in `show'
+
+
+  Rendered /home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.6ms)
+  Rendered /home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.8ms)
+  Rendered /home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (11.6ms)
+
+
+Started GET "/ideas/index" for 10.0.2.2 at 2016-12-16 15:21:26 +0000
+Processing by IdeasController#index as HTML
+  [1m[35mUser Load (1.3ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mIdea Load (1.7ms)[0m  [1mSELECT "ideas".* FROM "ideas" INNER JOIN "likes" ON "likes"."idea_id" = "ideas"."id" GROUP BY idea_id  ORDER BY count(likes.idea_id) DESC[0m
+  [1m[35mIdea Load (1.2ms)[0m  SELECT "ideas".* FROM "ideas"
+  [1m[36mUser Load (1.5ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (1.5ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (1.7ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 2]]
+  Rendered ideas/index.html.erb within layouts/application (10.5ms)
+  [1m[36mLike Load (0.9ms)[0m  [1mSELECT "likes".* FROM "likes"[0m
+Completed 200 OK in 266ms (Views: 198.2ms | ActiveRecord: 9.9ms)
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:21:26 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:21:26 +0000
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:21:26 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:21:26 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:21:26 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:21:26 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:21:26 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:21:26 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:21:26 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:21:27 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:21:27 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:21:27 +0000
+
+
+Started GET "/users/index" for 10.0.2.2 at 2016-12-16 15:21:43 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"index"}
+  [1m[35mUser Load (1.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 0]]
+Completed 404 Not Found in 2ms
+
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=index):
+  app/controllers/users_controller.rb:18:in `show'
+
+
+  Rendered /home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.4ms)
+  Rendered /home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.8ms)
+  Rendered /home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (11.0ms)
+
+
+Started GET "/users" for 10.0.2.2 at 2016-12-16 15:21:50 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 340ms (Views: 279.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:21:50 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:21:50 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:21:50 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:21:50 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:21:50 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:21:50 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:21:50 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:21:50 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:21:50 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:21:51 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:21:51 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:21:51 +0000
+
+
+Started GET "/users" for 10.0.2.2 at 2016-12-16 15:23:55 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 306ms (Views: 256.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:23:55 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:23:56 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:23:56 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:23:56 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:23:56 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:23:56 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:23:56 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:23:56 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:23:56 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:23:56 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:23:56 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:23:56 +0000
+
+
+Started GET "/users" for 10.0.2.2 at 2016-12-16 15:24:22 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 341ms (Views: 299.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:24:22 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:24:22 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:24:22 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:24:22 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:24:22 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:24:22 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:24:22 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:24:22 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:24:22 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:24:23 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:24:23 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:24:23 +0000
+
+
+Started GET "/users" for 10.0.2.2 at 2016-12-16 15:24:45 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 340ms (Views: 295.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:24:46 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:24:46 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:24:46 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:24:46 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:24:46 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:24:46 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:24:46 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:24:46 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:24:46 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:24:46 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:24:46 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:24:46 +0000
+
+
+Started GET "/users" for 10.0.2.2 at 2016-12-16 15:24:55 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 305ms (Views: 262.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:24:56 +0000
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:24:56 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:24:56 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:24:56 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:24:56 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:24:56 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:24:56 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:24:56 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:24:56 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:24:56 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:24:56 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:24:56 +0000
+
+
+Started GET "/users" for 10.0.2.2 at 2016-12-16 15:25:47 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 306ms (Views: 258.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:25:47 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:25:47 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:25:47 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:25:47 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:25:47 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:25:47 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:25:47 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:25:47 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:25:47 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:25:47 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:25:47 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:25:47 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:26:07 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:26:07 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:26:07 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:26:07 +0000
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:26:07 +0000
+
+
+Started GET "/users" for 10.0.2.2 at 2016-12-16 15:26:31 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 339ms (Views: 285.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:26:31 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:26:32 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:26:32 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:26:32 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:26:32 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:26:32 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:26:32 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 15:26:32 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:26:32 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:26:32 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:26:32 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:26:32 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:26:32 +0000
+
+
+Started GET "/users" for 10.0.2.2 at 2016-12-16 15:27:01 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 296ms (Views: 244.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:27:01 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:27:01 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:27:01 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:27:01 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:27:01 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:27:01 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:27:01 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 15:27:01 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:27:01 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:27:01 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:27:01 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:27:01 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:27:01 +0000
+
+
+Started GET "/users" for 10.0.2.2 at 2016-12-16 15:28:04 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 539ms (Views: 401.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:28:04 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:28:04 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:28:04 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:28:04 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:28:04 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:28:05 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 15:28:05 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:28:05 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:28:05 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:28:05 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:28:05 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:28:05 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:28:05 +0000
+
+
+Started GET "/users" for 10.0.2.2 at 2016-12-16 15:30:53 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 308ms (Views: 254.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:30:53 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:30:54 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:30:54 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:30:54 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:30:54 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:30:54 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:30:54 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 15:30:54 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:30:54 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:30:54 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:30:54 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:30:54 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:30:54 +0000
+
+
+Started GET "/users" for 10.0.2.2 at 2016-12-16 15:31:05 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 275ms (Views: 228.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:31:06 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:31:06 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:31:06 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:31:06 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:31:06 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:31:06 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:31:06 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 15:31:06 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:31:06 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:31:06 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:31:06 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:31:06 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:31:06 +0000
+
+
+Started GET "/users" for 10.0.2.2 at 2016-12-16 15:32:16 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 312ms (Views: 260.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:32:17 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:32:17 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:32:17 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:32:17 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:32:17 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:32:17 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:32:17 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 15:32:17 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:32:17 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:32:17 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:32:17 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:32:17 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:32:17 +0000
+
+
+Started GET "/users" for 10.0.2.2 at 2016-12-16 15:32:34 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 323ms (Views: 277.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:32:35 +0000
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:32:35 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:32:35 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:32:35 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:32:35 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:32:35 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:32:35 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 15:32:35 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:32:35 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:32:35 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:32:35 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:32:35 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:32:35 +0000
+
+
+Started GET "/users" for 10.0.2.2 at 2016-12-16 15:33:33 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 330ms (Views: 266.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:33:33 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:33:33 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:33:33 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:33:33 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:33:33 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:33:33 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:33:33 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 15:33:33 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:33:33 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:33:33 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:33:33 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:33:33 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:33:33 +0000
+
+
+Started GET "/users" for 10.0.2.2 at 2016-12-16 15:33:56 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 297ms (Views: 253.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:33:57 +0000
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:33:57 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:33:57 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:33:57 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:33:57 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:33:57 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:33:57 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 15:33:57 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:33:57 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:33:57 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:33:57 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:33:57 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:33:57 +0000
+
+
+Started GET "/users" for 10.0.2.2 at 2016-12-16 15:35:30 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 313ms (Views: 262.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:35:31 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:35:31 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:35:31 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:35:31 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:35:31 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:35:31 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:35:31 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 15:35:31 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:35:31 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:35:31 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:35:31 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:35:31 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:35:31 +0000
+
+
+Started POST "/sessions/create" for 10.0.2.2 at 2016-12-16 15:41:47 +0000
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FYLy906kiDE6IAeOw5pfr2weuf9p7DVoqm5cMWpoYGI=", "session"=>{"email"=>"maximequerou@gmail.com", "password"=>"[FILTERED]"}, "commit"=>"Log in"}
+  [1m[36mUser Load (1.7ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."email" = 'maximequerou@gmail.com' LIMIT 1[0m
+Redirected to http://localhost:3000/ideas
+Completed 302 Found in 19ms (ActiveRecord: 1.7ms)
+
+
+Started GET "/ideas" for 10.0.2.2 at 2016-12-16 15:41:47 +0000
+Processing by IdeasController#index as HTML
+  [1m[35mUser Load (0.9ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mIdea Load (1.1ms)[0m  [1mSELECT "ideas".* FROM "ideas" INNER JOIN "likes" ON "likes"."idea_id" = "ideas"."id" GROUP BY idea_id  ORDER BY count(likes.idea_id) DESC[0m
+  [1m[35mIdea Load (1.6ms)[0m  SELECT "ideas".* FROM "ideas"
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.9ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (1.2ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 2]]
+  Rendered ideas/index.html.erb within layouts/application (8.9ms)
+  [1m[36mLike Load (0.9ms)[0m  [1mSELECT "likes".* FROM "likes"[0m
+Completed 200 OK in 263ms (Views: 193.1ms | ActiveRecord: 7.3ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:41:47 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:41:47 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:41:47 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:41:47 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:41:47 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:41:47 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:41:47 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 15:41:47 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:41:47 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:41:47 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:41:47 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:41:47 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:41:48 +0000
+
+
+Started GET "/signout" for 10.0.2.2 at 2016-12-16 15:41:53 +0000
+Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3000/
+Completed 302 Found in 23ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 10.0.2.2 at 2016-12-16 15:41:53 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 250ms (Views: 189.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 10.0.2.2 at 2016-12-16 15:42:14 +0000
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FYLy906kiDE6IAeOw5pfr2weuf9p7DVoqm5cMWpoYGI=", "user"=>{"first_name"=>"leo", "last_name"=>"jekel", "email"=>"leojkel@gmail.com", "alias"=>"leo", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Register"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.9ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE LOWER("users"."email") = LOWER('leojkel@gmail.com') LIMIT 1[0m
+  [1m[35mSQL (1.8ms)[0m  INSERT INTO "users" ("alias", "created_at", "email", "encrypted_password", "first_name", "last_name", "salt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["alias", "leo"], ["created_at", "2016-12-16 15:42:14.348715"], ["email", "leojkel@gmail.com"], ["encrypted_password", "1fba25a7d5bbed70d0d582198825900e5dc3980811f9ed1dd66c1a2a2d13c795"], ["first_name", "leo"], ["last_name", "jekel"], ["salt", "6e16c464de71277aab7ecd94581412aa8888ee12683fbd23361c0466a603d519"], ["updated_at", "2016-12-16 15:42:14.348715"]]
+  [1m[36m (2.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 29ms (ActiveRecord: 4.8ms)
+
+
+Started GET "/" for 10.0.2.2 at 2016-12-16 15:42:14 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 235ms (Views: 188.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:42:14 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:42:14 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:42:14 +0000
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:42:14 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:42:14 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:42:14 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:42:14 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 15:42:14 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:42:15 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:42:15 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:42:15 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:42:15 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:42:15 +0000
+
+
+Started POST "/users" for 10.0.2.2 at 2016-12-16 15:44:03 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FYLy906kiDE6IAeOw5pfr2weuf9p7DVoqm5cMWpoYGI=", "user"=>{"first_name"=>"maxime", "last_name"=>"querou", "email"=>"maximequerou1@gmail.com", "alias"=>"leo", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Register"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (1.7ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE LOWER("users"."email") = LOWER('maximequerou1@gmail.com') LIMIT 1[0m
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "users" ("alias", "created_at", "email", "encrypted_password", "first_name", "last_name", "salt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["alias", "leo"], ["created_at", "2016-12-16 15:44:03.639055"], ["email", "maximequerou1@gmail.com"], ["encrypted_password", "6bbfb4525b1e4e0d9fc6eddca6f057e07ca258b844ab57f31e66447e681749d4"], ["first_name", "maxime"], ["last_name", "querou"], ["salt", "cc4873dee07c0f20759ef83014a4ed8f6488e4c105a26932aa4e5243dc414340"], ["updated_at", "2016-12-16 15:44:03.639055"]]
+  [1m[36m (2.1ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Footnotes Footnotes::Notes::ViewNote Exception: undefined method `[]' for nil:NilClass
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/rails-footnotes-4.1.8/lib/rails-footnotes/notes/view_note.rb:36:in `filename'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/rails-footnotes-4.1.8/lib/rails-footnotes/notes/view_note.rb:30:in `valid?'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/rails-footnotes-4.1.8/lib/rails-footnotes/filter.rb:103:in `block in initialize_notes!'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/rails-footnotes-4.1.8/lib/rails-footnotes/each_with_rescue.rb:15:in `block in each_with_rescue'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/rails-footnotes-4.1.8/lib/rails-footnotes/each_with_rescue.rb:13:in `each'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/rails-footnotes-4.1.8/lib/rails-footnotes/each_with_rescue.rb:13:in `each_with_rescue'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/rails-footnotes-4.1.8/lib/rails-footnotes/filter.rb:355:in `each_with_rescue'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/rails-footnotes-4.1.8/lib/rails-footnotes/filter.rb:101:in `initialize_notes!'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/rails-footnotes-4.1.8/lib/rails-footnotes/filter.rb:95:in `add_footnotes_without_validation!'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/rails-footnotes-4.1.8/lib/rails-footnotes/filter.rb:73:in `add_footnotes!'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/rails-footnotes-4.1.8/lib/rails-footnotes/extension.rb:27:in `rails_footnotes_after_filter'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/activesupport-4.1.8/lib/active_support/callbacks.rb:424:in `block in make_lambda'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/activesupport-4.1.8/lib/active_support/callbacks.rb:231:in `block in halting'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/activesupport-4.1.8/lib/active_support/callbacks.rb:166:in `block in halting'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/activesupport-4.1.8/lib/active_support/callbacks.rb:166:in `block in halting'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/activesupport-4.1.8/lib/active_support/callbacks.rb:86:in `run_callbacks'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/abstract_controller/callbacks.rb:19:in `process_action'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_controller/metal/rescue.rb:29:in `process_action'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_controller/metal/instrumentation.rb:31:in `block in process_action'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/activesupport-4.1.8/lib/active_support/notifications.rb:159:in `block in instrument'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/activesupport-4.1.8/lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/activesupport-4.1.8/lib/active_support/notifications.rb:159:in `instrument'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/activerecord-4.1.8/lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/abstract_controller/base.rb:136:in `process'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionview-4.1.8/lib/action_view/rendering.rb:30:in `process'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_controller/metal.rb:196:in `dispatch'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_controller/metal.rb:232:in `block in action'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/routing/route_set.rb:82:in `dispatch'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/routing/route_set.rb:50:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/journey/router.rb:73:in `block in call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/journey/router.rb:59:in `each'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/journey/router.rb:59:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/routing/route_set.rb:678:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/rack-1.5.5/lib/rack/etag.rb:23:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/rack-1.5.5/lib/rack/conditionalget.rb:35:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/rack-1.5.5/lib/rack/head.rb:11:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/flash.rb:254:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/rack-1.5.5/lib/rack/session/abstract/id.rb:225:in `context'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/rack-1.5.5/lib/rack/session/abstract/id.rb:220:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/cookies.rb:560:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/activerecord-4.1.8/lib/active_record/query_cache.rb:36:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/activerecord-4.1.8/lib/active_record/connection_adapters/abstract/connection_pool.rb:621:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/activerecord-4.1.8/lib/active_record/migration.rb:380:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/activesupport-4.1.8/lib/active_support/callbacks.rb:82:in `run_callbacks'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/reloader.rb:73:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/railties-4.1.8/lib/rails/rack/logger.rb:38:in `call_app'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/railties-4.1.8/lib/rails/rack/logger.rb:20:in `block in call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/activesupport-4.1.8/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/activesupport-4.1.8/lib/active_support/tagged_logging.rb:26:in `tagged'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/activesupport-4.1.8/lib/active_support/tagged_logging.rb:68:in `tagged'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/railties-4.1.8/lib/rails/rack/logger.rb:20:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/rack-1.5.5/lib/rack/methodoverride.rb:21:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/rack-1.5.5/lib/rack/runtime.rb:17:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/activesupport-4.1.8/lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/rack-1.5.5/lib/rack/lock.rb:17:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/static.rb:84:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/rack-1.5.5/lib/rack/sendfile.rb:112:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/railties-4.1.8/lib/rails/engine.rb:514:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/railties-4.1.8/lib/rails/application.rb:144:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/rack-1.5.5/lib/rack/lock.rb:17:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/rack-1.5.5/lib/rack/content_length.rb:14:in `call'
+/home/vagrant/.rvm/gems/ruby-2.3.1/gems/rack-1.5.5/lib/rack/handler/webrick.rb:60:in `service'
+/home/vagrant/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+/home/vagrant/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+/home/vagrant/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+Completed 302 Found in 150ms (ActiveRecord: 10.5ms)
+
+
+Started GET "/" for 10.0.2.2 at 2016-12-16 15:44:03 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (40.6ms)
+Completed 200 OK in 503ms (Views: 450.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:44:04 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:44:04 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:44:04 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:04 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:44:04 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:44:04 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:04 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:04 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:04 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:04 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:04 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:04 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:04 +0000
+
+
+Started POST "/sessions/create" for 10.0.2.2 at 2016-12-16 15:44:15 +0000
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FYLy906kiDE6IAeOw5pfr2weuf9p7DVoqm5cMWpoYGI=", "session"=>{"email"=>"maximequerou1@gmail.com", "password"=>"[FILTERED]"}, "commit"=>"Log in"}
+  [1m[35mUser Load (1.7ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."email" = 'maximequerou1@gmail.com' LIMIT 1
+Redirected to http://localhost:3000/ideas
+Completed 302 Found in 50ms (ActiveRecord: 1.7ms)
+
+
+Started GET "/ideas" for 10.0.2.2 at 2016-12-16 15:44:15 +0000
+Processing by IdeasController#index as HTML
+  [1m[36mUser Load (1.3ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mIdea Load (2.2ms)[0m  SELECT "ideas".* FROM "ideas" INNER JOIN "likes" ON "likes"."idea_id" = "ideas"."id" GROUP BY idea_id  ORDER BY count(likes.idea_id) DESC
+  [1m[36mIdea Load (2.0ms)[0m  [1mSELECT "ideas".* FROM "ideas"[0m
+  [1m[35mUser Load (1.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (2.4ms)[0m  [1mSELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?[0m  [["idea_id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (1.5ms)[0m  [1mSELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?[0m  [["idea_id", 2]]
+  Rendered ideas/index.html.erb within layouts/application (64.0ms)
+  [1m[35mLike Load (1.9ms)[0m  SELECT "likes".* FROM "likes"
+Completed 200 OK in 411ms (Views: 270.0ms | ActiveRecord: 21.8ms)
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:44:15 +0000
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:44:15 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:44:16 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:44:16 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:16 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:44:16 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:16 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:16 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:16 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:16 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:16 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:16 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:16 +0000
+
+
+Started POST "/likes/create" for 10.0.2.2 at 2016-12-16 15:44:21 +0000
+Processing by LikesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FYLy906kiDE6IAeOw5pfr2weuf9p7DVoqm5cMWpoYGI=", "like"=>{"user_id"=>"3", "idea_id"=>"1"}, "commit"=>"Like"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mLike Exists (2.3ms)[0m  SELECT  1 AS one FROM "likes"  WHERE ("likes"."user_id" = 3 AND "likes"."idea_id" = 1) LIMIT 1
+  [1m[36mSQL (4.8ms)[0m  [1mINSERT INTO "likes" ("created_at", "idea_id", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", "2016-12-16 15:44:21.932767"], ["idea_id", 1], ["updated_at", "2016-12-16 15:44:21.932767"], ["user_id", 3]]
+  [1m[35m (4.3ms)[0m  commit transaction
+Redirected to http://localhost:3000/ideas
+Completed 302 Found in 50ms (ActiveRecord: 11.6ms)
+
+
+Started GET "/ideas" for 10.0.2.2 at 2016-12-16 15:44:21 +0000
+Processing by IdeasController#index as HTML
+  [1m[36mUser Load (1.4ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mIdea Load (2.0ms)[0m  SELECT "ideas".* FROM "ideas" INNER JOIN "likes" ON "likes"."idea_id" = "ideas"."id" GROUP BY idea_id  ORDER BY count(likes.idea_id) DESC
+  [1m[36mIdea Load (1.4ms)[0m  [1mSELECT "ideas".* FROM "ideas"[0m
+  [1m[35mUser Load (0.9ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.9ms)[0m  [1mSELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?[0m  [["idea_id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (1.7ms)[0m  [1mSELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?[0m  [["idea_id", 2]]
+  Rendered ideas/index.html.erb within layouts/application (10.4ms)
+  [1m[35mLike Load (0.8ms)[0m  SELECT "likes".* FROM "likes"
+Completed 200 OK in 292ms (Views: 222.2ms | ActiveRecord: 9.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:44:22 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:44:22 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:44:22 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:44:22 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:44:22 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:22 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:22 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:22 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:22 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:22 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:22 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:22 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:22 +0000
+
+
+Started POST "/ideas/create" for 10.0.2.2 at 2016-12-16 15:44:36 +0000
+Processing by IdeasController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FYLy906kiDE6IAeOw5pfr2weuf9p7DVoqm5cMWpoYGI=", "idea"=>{"idea"=>"bienvenue", "user_id"=>"3"}, "commit"=>"Idea!"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (3.8ms)[0m  INSERT INTO "ideas" ("created_at", "idea", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", "2016-12-16 15:44:37.007938"], ["idea", "bienvenue"], ["updated_at", "2016-12-16 15:44:37.007938"], ["user_id", 3]]
+  [1m[36m (2.3ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/ideas
+Completed 302 Found in 27ms (ActiveRecord: 6.2ms)
+
+
+Started GET "/ideas" for 10.0.2.2 at 2016-12-16 15:44:37 +0000
+Processing by IdeasController#index as HTML
+  [1m[35mUser Load (1.4ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mIdea Load (1.0ms)[0m  [1mSELECT "ideas".* FROM "ideas" INNER JOIN "likes" ON "likes"."idea_id" = "ideas"."id" GROUP BY idea_id  ORDER BY count(likes.idea_id) DESC[0m
+  [1m[35mIdea Load (1.5ms)[0m  SELECT "ideas".* FROM "ideas"
+  [1m[36mUser Load (1.7ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (1.2ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (1.6ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 2]]
+  [1m[36mUser Load (1.6ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (1.3ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 3]]
+  Rendered ideas/index.html.erb within layouts/application (17.4ms)
+  [1m[36mLike Load (0.8ms)[0m  [1mSELECT "likes".* FROM "likes"[0m
+Completed 200 OK in 271ms (Views: 201.7ms | ActiveRecord: 12.2ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:44:37 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:44:37 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:44:37 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:44:37 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:44:37 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:37 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:37 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:37 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:37 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:37 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:37 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:37 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:37 +0000
+
+
+Started POST "/likes/create" for 10.0.2.2 at 2016-12-16 15:44:42 +0000
+Processing by LikesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FYLy906kiDE6IAeOw5pfr2weuf9p7DVoqm5cMWpoYGI=", "like"=>{"user_id"=>"3", "idea_id"=>"3"}, "commit"=>"Like"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mLike Exists (1.3ms)[0m  [1mSELECT  1 AS one FROM "likes"  WHERE ("likes"."user_id" = 3 AND "likes"."idea_id" = 3) LIMIT 1[0m
+  [1m[35mSQL (2.8ms)[0m  INSERT INTO "likes" ("created_at", "idea_id", "updated_at", "user_id") VALUES (?, ?, ?, ?)  [["created_at", "2016-12-16 15:44:42.529291"], ["idea_id", 3], ["updated_at", "2016-12-16 15:44:42.529291"], ["user_id", 3]]
+  [1m[36m (10.8ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/ideas
+Completed 302 Found in 47ms (ActiveRecord: 15.1ms)
+
+
+Started GET "/ideas" for 10.0.2.2 at 2016-12-16 15:44:42 +0000
+Processing by IdeasController#index as HTML
+  [1m[35mUser Load (1.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mIdea Load (1.3ms)[0m  [1mSELECT "ideas".* FROM "ideas" INNER JOIN "likes" ON "likes"."idea_id" = "ideas"."id" GROUP BY idea_id  ORDER BY count(likes.idea_id) DESC[0m
+  [1m[35mIdea Load (1.5ms)[0m  SELECT "ideas".* FROM "ideas"
+  [1m[36mUser Load (1.4ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (1.4ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 1]]
+  [1m[36mUser Load (1.4ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (1.1ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (1.6ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 2]]
+  Rendered ideas/index.html.erb within layouts/application (16.8ms)
+  [1m[36mLike Load (1.2ms)[0m  [1mSELECT "likes".* FROM "likes"[0m
+Completed 200 OK in 290ms (Views: 208.9ms | ActiveRecord: 12.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:44:42 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:44:43 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:44:43 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:44:43 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:43 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:44:43 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:43 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:43 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:43 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:43 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:43 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:43 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:44:43 +0000
+
+
+Started GET "/users/1" for 10.0.2.2 at 2016-12-16 15:44:56 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (1.6ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (1.7ms)[0m  [1mSELECT COUNT(*) FROM "ideas"  WHERE "ideas"."user_id" = 1[0m
+  [1m[35m (1.5ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."user_id" = 1
+  Rendered users/show.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 285ms (Views: 217.1ms | ActiveRecord: 4.8ms)
+
+
+Started GET "/ideas" for 10.0.2.2 at 2016-12-16 15:45:06 +0000
+Processing by IdeasController#index as HTML
+  [1m[36mUser Load (2.5ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mIdea Load (1.5ms)[0m  SELECT "ideas".* FROM "ideas" INNER JOIN "likes" ON "likes"."idea_id" = "ideas"."id" GROUP BY idea_id  ORDER BY count(likes.idea_id) DESC
+  [1m[36mIdea Load (0.9ms)[0m  [1mSELECT "ideas".* FROM "ideas"[0m
+  [1m[35mUser Load (1.7ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.9ms)[0m  [1mSELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?[0m  [["idea_id", 1]]
+  [1m[35mUser Load (1.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36m (3.4ms)[0m  [1mSELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?[0m  [["idea_id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (1.5ms)[0m  [1mSELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?[0m  [["idea_id", 2]]
+  Rendered ideas/index.html.erb within layouts/application (24.2ms)
+  [1m[35mLike Load (0.8ms)[0m  SELECT "likes".* FROM "likes"
+Completed 200 OK in 354ms (Views: 262.6ms | ActiveRecord: 14.3ms)
+
+
+Started GET "/users/1" for 10.0.2.2 at 2016-12-16 15:47:26 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (1.6ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (1.5ms)[0m  SELECT COUNT(*) FROM "ideas"  WHERE "ideas"."user_id" = 1
+  [1m[36m (1.6ms)[0m  [1mSELECT COUNT(*) FROM "likes"  WHERE "likes"."user_id" = 1[0m
+  Rendered users/show.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 349ms (Views: 284.7ms | ActiveRecord: 4.7ms)
+
+
+Started GET "/ideas" for 10.0.2.2 at 2016-12-16 15:50:31 +0000
+Processing by IdeasController#index as HTML
+  [1m[35mUser Load (2.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mIdea Load (1.7ms)[0m  [1mSELECT "ideas".* FROM "ideas" INNER JOIN "likes" ON "likes"."idea_id" = "ideas"."id" GROUP BY idea_id  ORDER BY count(likes.idea_id) DESC[0m
+  [1m[35mIdea Load (1.5ms)[0m  SELECT "ideas".* FROM "ideas"
+  [1m[36mUser Load (1.4ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.7ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 1]]
+  [1m[36mUser Load (0.9ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (1.5ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (1.7ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 2]]
+  Rendered ideas/index.html.erb within layouts/application (14.8ms)
+  [1m[36mLike Load (1.0ms)[0m  [1mSELECT "likes".* FROM "likes"[0m
+Completed 200 OK in 376ms (Views: 281.2ms | ActiveRecord: 12.6ms)
+
+
+Started GET "/ideas" for 10.0.2.2 at 2016-12-16 15:50:39 +0000
+Processing by IdeasController#index as HTML
+  [1m[35mUser Load (1.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mIdea Load (1.4ms)[0m  [1mSELECT "ideas".* FROM "ideas" INNER JOIN "likes" ON "likes"."idea_id" = "ideas"."id" GROUP BY idea_id  ORDER BY count(likes.idea_id) DESC[0m
+  [1m[35mIdea Load (1.5ms)[0m  SELECT "ideas".* FROM "ideas"
+  [1m[36mUser Load (0.8ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.7ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 1]]
+  [1m[36mUser Load (1.4ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (1.1ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (1.4ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 2]]
+  Rendered ideas/index.html.erb within layouts/application (15.4ms)
+  [1m[36mLike Load (1.0ms)[0m  [1mSELECT "likes".* FROM "likes"[0m
+Completed 200 OK in 332ms (Views: 247.6ms | ActiveRecord: 10.7ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:50:40 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:50:40 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:50:40 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:50:40 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:50:40 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:50:40 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:50:40 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 15:50:40 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:50:40 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:50:40 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:50:40 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:50:40 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:50:40 +0000
+
+
+Started GET "/ideas" for 10.0.2.2 at 2016-12-16 15:51:07 +0000
+Processing by IdeasController#index as HTML
+  [1m[35mUser Load (1.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mIdea Load (1.7ms)[0m  [1mSELECT "ideas".* FROM "ideas" INNER JOIN "likes" ON "likes"."idea_id" = "ideas"."id" GROUP BY idea_id  ORDER BY count(likes.idea_id) DESC[0m
+  [1m[35mIdea Load (1.1ms)[0m  SELECT "ideas".* FROM "ideas"
+  [1m[36mUser Load (0.8ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.7ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 1]]
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (0.9ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (1.6ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 2]]
+  Rendered ideas/index.html.erb within layouts/application (12.8ms)
+  [1m[36mLike Load (0.9ms)[0m  [1mSELECT "likes".* FROM "likes"[0m
+Completed 200 OK in 305ms (Views: 228.7ms | ActiveRecord: 9.4ms)
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:51:08 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:51:08 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:51:08 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:51:08 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:51:08 +0000
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:51:08 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:51:08 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 15:51:08 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:51:08 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:51:08 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:51:08 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:51:08 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:51:08 +0000
+
+
+Started GET "/users/1" for 10.0.2.2 at 2016-12-16 15:51:15 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (1.7ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (1.5ms)[0m  [1mSELECT COUNT(*) FROM "ideas"  WHERE "ideas"."user_id" = 1[0m
+  [1m[35m (1.3ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."user_id" = 1
+  Rendered users/show.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 261ms (Views: 196.4ms | ActiveRecord: 4.4ms)
+
+
+Started GET "/users/1" for 10.0.2.2 at 2016-12-16 15:51:36 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (1.4ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (1.5ms)[0m  SELECT COUNT(*) FROM "ideas"  WHERE "ideas"."user_id" = 1
+  [1m[36m (1.7ms)[0m  [1mSELECT COUNT(*) FROM "likes"  WHERE "likes"."user_id" = 1[0m
+  Rendered users/show.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 285ms (Views: 221.8ms | ActiveRecord: 4.6ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:51:36 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:51:36 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:51:36 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:51:36 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:51:36 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:51:36 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:51:36 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 15:51:36 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:51:36 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:51:36 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:51:36 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:51:36 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:51:37 +0000
+
+
+Started GET "/ideas" for 10.0.2.2 at 2016-12-16 15:51:39 +0000
+Processing by IdeasController#index as HTML
+  [1m[35mUser Load (1.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mIdea Load (1.7ms)[0m  [1mSELECT "ideas".* FROM "ideas" INNER JOIN "likes" ON "likes"."idea_id" = "ideas"."id" GROUP BY idea_id  ORDER BY count(likes.idea_id) DESC[0m
+  [1m[35mIdea Load (1.6ms)[0m  SELECT "ideas".* FROM "ideas"
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.7ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 1]]
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (0.7ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (1.5ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 2]]
+  Rendered ideas/index.html.erb within layouts/application (12.5ms)
+  [1m[36mLike Load (1.1ms)[0m  [1mSELECT "likes".* FROM "likes"[0m
+Completed 200 OK in 303ms (Views: 223.9ms | ActiveRecord: 9.8ms)
+
+
+Started GET "/ideas" for 10.0.2.2 at 2016-12-16 15:51:55 +0000
+Processing by IdeasController#index as HTML
+  [1m[35mUser Load (1.7ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mIdea Load (1.6ms)[0m  [1mSELECT "ideas".* FROM "ideas" INNER JOIN "likes" ON "likes"."idea_id" = "ideas"."id" GROUP BY idea_id  ORDER BY count(likes.idea_id) DESC[0m
+  [1m[35mIdea Load (1.1ms)[0m  SELECT "ideas".* FROM "ideas"
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (1.1ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 1]]
+  [1m[36mUser Load (0.8ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (1.2ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (1.6ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 2]]
+  Rendered ideas/index.html.erb within layouts/application (15.0ms)
+  [1m[36mLike Load (1.3ms)[0m  [1mSELECT "likes".* FROM "likes"[0m
+Completed 200 OK in 289ms (Views: 216.0ms | ActiveRecord: 11.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:51:56 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:51:56 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:51:56 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:51:56 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:51:56 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:51:56 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:51:56 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 15:51:56 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:51:56 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:51:56 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:51:56 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:51:56 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:51:56 +0000
+
+
+Started GET "/ideas" for 10.0.2.2 at 2016-12-16 15:53:00 +0000
+Processing by IdeasController#index as HTML
+  [1m[35mUser Load (1.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mIdea Load (1.3ms)[0m  [1mSELECT "ideas".* FROM "ideas" INNER JOIN "likes" ON "likes"."idea_id" = "ideas"."id" GROUP BY idea_id  ORDER BY count(likes.idea_id) DESC[0m
+  [1m[35mIdea Load (1.4ms)[0m  SELECT "ideas".* FROM "ideas"
+  [1m[36mUser Load (1.6ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (1.3ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 1]]
+  [1m[36mUser Load (1.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (1.2ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (1.6ms)[0m  SELECT COUNT(*) FROM "likes"  WHERE "likes"."idea_id" = ?  [["idea_id", 2]]
+  Rendered ideas/index.html.erb within layouts/application (17.6ms)
+  [1m[36mLike Load (0.9ms)[0m  [1mSELECT "likes".* FROM "likes"[0m
+Completed 200 OK in 315ms (Views: 236.6ms | ActiveRecord: 11.6ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 15:53:01 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 15:53:01 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 15:53:01 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 15:53:01 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 15:53:01 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 15:53:01 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 15:53:01 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 15:53:01 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 15:53:01 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 15:53:01 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 15:53:01 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 15:53:01 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 15:53:01 +0000
+
+
+Started GET "/signout" for 10.0.2.2 at 2016-12-16 15:53:05 +0000
+Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3000/
+Completed 302 Found in 24ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 10.0.2.2 at 2016-12-16 15:53:05 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 254ms (Views: 196.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 10.0.2.2 at 2016-12-16 16:01:04 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (43.3ms)
+Completed 200 OK in 524ms (Views: 415.3ms | ActiveRecord: 6.1ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 16:01:05 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 16:01:05 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 16:01:05 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 16:01:05 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 16:01:05 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 16:01:05 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 16:01:05 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 16:01:05 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 16:01:05 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 16:01:05 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 16:01:05 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 16:01:05 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 16:01:05 +0000
+
+
+Started GET "/" for 10.0.2.2 at 2016-12-16 16:04:24 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 355ms (Views: 312.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 16:04:25 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 16:04:25 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 16:04:25 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:25 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 16:04:25 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 16:04:25 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:25 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:25 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:25 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:25 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:25 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:25 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:25 +0000
+
+
+Started GET "/" for 10.0.2.2 at 2016-12-16 16:04:40 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 307ms (Views: 264.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 16:04:40 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 16:04:40 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 16:04:40 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:41 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 16:04:41 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 16:04:41 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:41 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:41 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:41 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:41 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:41 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:41 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:41 +0000
+
+
+Started GET "/" for 10.0.2.2 at 2016-12-16 16:04:48 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 362ms (Views: 309.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 16:04:48 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 16:04:48 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 16:04:48 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 16:04:48 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 16:04:48 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:48 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:49 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:49 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:49 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:49 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:49 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:49 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:49 +0000
+
+
+Started GET "/" for 10.0.2.2 at 2016-12-16 16:04:57 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 352ms (Views: 298.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 16:04:57 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 16:04:57 +0000
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 16:04:58 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 16:04:58 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:58 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 16:04:58 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:58 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:58 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:58 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:58 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:58 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:58 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 16:04:58 +0000
+
+
+Started GET "/" for 10.0.2.2 at 2016-12-16 16:05:03 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 365ms (Views: 317.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 16:05:03 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 16:05:03 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 16:05:03 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 16:05:03 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 16:05:03 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:03 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:03 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:03 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:04 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:04 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:04 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:04 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:04 +0000
+
+
+Started GET "/" for 10.0.2.2 at 2016-12-16 16:05:22 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 355ms (Views: 301.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 16:05:23 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 16:05:23 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 16:05:23 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:23 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 16:05:23 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 16:05:23 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:23 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:23 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:23 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:23 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:23 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:23 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:23 +0000
+
+
+Started GET "/" for 10.0.2.2 at 2016-12-16 16:05:30 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 377ms (Views: 304.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 16:05:30 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 16:05:30 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 16:05:30 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:30 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 16:05:30 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 16:05:30 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:30 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:30 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:30 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:31 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:31 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:31 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:31 +0000
+
+
+Started GET "/" for 10.0.2.2 at 2016-12-16 16:05:44 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 330ms (Views: 287.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 16:05:44 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 16:05:44 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 16:05:44 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:44 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 16:05:44 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 16:05:44 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:44 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:44 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:44 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:44 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:44 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:44 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:44 +0000
+
+
+Started GET "/" for 10.0.2.2 at 2016-12-16 16:05:57 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 328ms (Views: 281.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 16:05:58 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 16:05:58 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 16:05:58 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 16:05:58 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:58 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 16:05:58 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:58 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:58 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:58 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:58 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:58 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:58 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 16:05:58 +0000
+
+
+Started GET "/" for 10.0.2.2 at 2016-12-16 16:06:04 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 303ms (Views: 244.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 16:06:04 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 16:06:04 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 16:06:04 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 16:06:04 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 16:06:04 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 16:06:04 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 16:06:04 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 16:06:04 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 16:06:05 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 16:06:05 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 16:06:05 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 16:06:05 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 16:06:05 +0000
+
+
+Started GET "/" for 10.0.2.2 at 2016-12-16 16:27:00 +0000
+Processing by UsersController#index as HTML
+  Rendered users/index.html.erb within layouts/application (7.1ms)
+Completed 200 OK in 311ms (Views: 235.5ms | ActiveRecord: 5.8ms)
+
+
+Started GET "/assets/ideas.css?body=1" for 10.0.2.2 at 2016-12-16 16:27:01 +0000
+
+
+Started GET "/assets/likes.css?body=1" for 10.0.2.2 at 2016-12-16 16:27:01 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2016-12-16 16:27:01 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2016-12-16 16:27:01 +0000
+
+
+Started GET "/assets/users.css?body=1" for 10.0.2.2 at 2016-12-16 16:27:01 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2016-12-16 16:27:01 +0000
+
+
+Started GET "/assets/sessions.css?body=1" for 10.0.2.2 at 2016-12-16 16:27:01 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2016-12-16 16:27:01 +0000
+
+
+Started GET "/assets/ideas.js?body=1" for 10.0.2.2 at 2016-12-16 16:27:01 +0000
+
+
+Started GET "/assets/likes.js?body=1" for 10.0.2.2 at 2016-12-16 16:27:01 +0000
+
+
+Started GET "/assets/sessions.js?body=1" for 10.0.2.2 at 2016-12-16 16:27:01 +0000
+
+
+Started GET "/assets/users.js?body=1" for 10.0.2.2 at 2016-12-16 16:27:01 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2016-12-16 16:27:01 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.6ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.6ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_ideas_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_ideas_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.6ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_likes_on_idea_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_likes_on_idea_id' AND type='index'
+
+  [1m[36m (1.3ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_likes_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_likes_on_user_id' AND type='index'
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to RemoveColumns (20161216163035)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (1.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20161216163035"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (1.0ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_ideas_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_ideas_on_user_id' AND type='index'
+
+  [1m[36m (1.6ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_likes_on_idea_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_likes_on_idea_id' AND type='index'
+[0m
+  [1m[35m (3.0ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_likes_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_likes_on_user_id' AND type='index'
+
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.8ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.8ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_ideas_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_ideas_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.6ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_likes_on_idea_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_likes_on_idea_id' AND type='index'
+
+  [1m[36m (0.7ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_likes_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_likes_on_user_id' AND type='index'
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.9ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.7ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_ideas_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_ideas_on_user_id' AND type='index'
+[0m
+  [1m[35m (1.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_likes_on_idea_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_likes_on_idea_id' AND type='index'
+
+  [1m[36m (1.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_likes_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_likes_on_user_id' AND type='index'
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.7ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (1.3ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_ideas_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_ideas_on_user_id' AND type='index'
+[0m
+  [1m[35m (1.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_likes_on_idea_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_likes_on_idea_id' AND type='index'
+
+  [1m[36m (1.7ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_likes_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_likes_on_user_id' AND type='index'
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to RemovealiasfromUsers (20161216163643)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (1.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20161216163643"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (1.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_ideas_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_ideas_on_user_id' AND type='index'
+
+  [1m[36m (1.0ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_likes_on_idea_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_likes_on_idea_id' AND type='index'
+[0m
+  [1m[35m (1.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_likes_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_likes_on_user_id' AND type='index'
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to Removealiasfromusers (20161216163842)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (2.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20161216163842"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.8ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_ideas_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_ideas_on_user_id' AND type='index'
+
+  [1m[36m (1.0ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_likes_on_idea_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_likes_on_idea_id' AND type='index'
+[0m
+  [1m[35m (0.8ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_likes_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_likes_on_user_id' AND type='index'
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to RemoveAliasFromUsers (20161216164006)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.8ms)[0m  [1mCREATE TEMPORARY TABLE "ausers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar(255), "last_name" varchar(255), "alias" varchar(255), "email" varchar(255), "encrypted_password" varchar(255), "salt" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "users"
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "ausers" ("id","first_name","last_name","alias","email","encrypted_password","salt","created_at","updated_at") VALUES (1, 'maxime', 'querou', 'max', 'maximequerou@gmail.com', '805ed2ae8fdb0b92082b924905a6000e886a44ada59697ae8d3828d3440908be', '08fe332b7a7f0e1d12bc4c5ea1e6639b7b5f451a139d0c4918d84459536ae8a3', '2016-12-16 15:07:14.318374', '2016-12-16 15:07:14.318374')[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "ausers" ("id","first_name","last_name","alias","email","encrypted_password","salt","created_at","updated_at") VALUES (2, 'leo', 'jekel', 'leo', 'leojkel@gmail.com', '1fba25a7d5bbed70d0d582198825900e5dc3980811f9ed1dd66c1a2a2d13c795', '6e16c464de71277aab7ecd94581412aa8888ee12683fbd23361c0466a603d519', '2016-12-16 15:42:14.348715', '2016-12-16 15:42:14.348715')
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "ausers" ("id","first_name","last_name","alias","email","encrypted_password","salt","created_at","updated_at") VALUES (3, 'maxime', 'querou', 'leo', 'maximequerou1@gmail.com', '6bbfb4525b1e4e0d9fc6eddca6f057e07ca258b844ab57f31e66447e681749d4', 'cc4873dee07c0f20759ef83014a4ed8f6488e4c105a26932aa4e5243dc414340', '2016-12-16 15:44:03.639055', '2016-12-16 15:44:03.639055')[0m
+  [1m[35m (2.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar(255), "last_name" varchar(255), "email" varchar(255), "encrypted_password" varchar(255), "salt" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "ausers"
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "users" ("id","first_name","last_name","email","encrypted_password","salt","created_at","updated_at") VALUES (1, 'maxime', 'querou', 'maximequerou@gmail.com', '805ed2ae8fdb0b92082b924905a6000e886a44ada59697ae8d3828d3440908be', '08fe332b7a7f0e1d12bc4c5ea1e6639b7b5f451a139d0c4918d84459536ae8a3', '2016-12-16 15:07:14.318374', '2016-12-16 15:07:14.318374')[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "users" ("id","first_name","last_name","email","encrypted_password","salt","created_at","updated_at") VALUES (2, 'leo', 'jekel', 'leojkel@gmail.com', '1fba25a7d5bbed70d0d582198825900e5dc3980811f9ed1dd66c1a2a2d13c795', '6e16c464de71277aab7ecd94581412aa8888ee12683fbd23361c0466a603d519', '2016-12-16 15:42:14.348715', '2016-12-16 15:42:14.348715')
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "users" ("id","first_name","last_name","email","encrypted_password","salt","created_at","updated_at") VALUES (3, 'maxime', 'querou', 'maximequerou1@gmail.com', '6bbfb4525b1e4e0d9fc6eddca6f057e07ca258b844ab57f31e66447e681749d4', 'cc4873dee07c0f20759ef83014a4ed8f6488e4c105a26932aa4e5243dc414340', '2016-12-16 15:44:03.639055', '2016-12-16 15:44:03.639055')[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "ausers"
+  [1m[36mSQL (1.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20161216164006"]]
+  [1m[35m (4.7ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (1.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.6ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_ideas_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_ideas_on_user_id' AND type='index'
+
+  [1m[36m (0.9ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_likes_on_idea_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_likes_on_idea_id' AND type='index'
+[0m
+  [1m[35m (0.8ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_likes_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_likes_on_user_id' AND type='index'
+
